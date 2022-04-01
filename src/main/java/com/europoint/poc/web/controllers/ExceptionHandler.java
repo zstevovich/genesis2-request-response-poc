@@ -1,7 +1,6 @@
 package com.europoint.poc.web.controllers;
 
 import com.europoint.poc.modules.poc.app.services.exceptions.ServiceException;
-import com.europoint.poc.modules.poc.app.services.traits.ServiceExceptionTrait;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

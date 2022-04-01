@@ -3,7 +3,6 @@ package com.europoint.poc.modules.poc.app.services.exceptions;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 
