@@ -6,7 +6,7 @@ import com.europoint.poc.modules.poc.app.services.exceptions.ServiceException;
 import com.europoint.poc.modules.poc.app.services.exceptions.ServiceExceptionDetails;
 import com.europoint.poc.modules.poc.app.services.exceptions.ServiceProblem;
 import com.europoint.poc.modules.poc.domain.entities.PocEntity;
-import im.aop.loggers.advice.around.LogAround;
+//import im.aop.loggers.advice.around.LogAround;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -17,9 +17,9 @@ import java.util.Objects;
 @Service
 public class PocServiceImpl implements PocService {
 
-    @LogAround
+    //@LogAround
     @Override
-    public Mono<PocDto> getPocData(String name) throws Exception {
+    public PocDto getPocData(String name)  {
         String one = "Perino ime je ruzno";
         String second = "Perino ime je kratko";
         Collection<String> errors = new ArrayList<>();
@@ -35,10 +35,8 @@ public class PocServiceImpl implements PocService {
         if (Objects.equals(name, "Steva")) {
             throw new ServiceException("Steva Is Invalid name");
         }
-        if (Objects.equals(name, "Obican")) {
-            throw new Exception("Obican Is Invalid name");
-        }
+
         PocEntity poc = new PocEntity(name,"Dobracina");
-        return Mono.just(new PocDto(poc.getName(), poc.getAddress()));
+        return new PocDto(poc.getName(), poc.getAddress(), Thread.currentThread().getName());
     }
 }

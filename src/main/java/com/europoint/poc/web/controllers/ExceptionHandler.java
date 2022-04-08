@@ -4,7 +4,7 @@ import com.europoint.poc.modules.poc.app.services.exceptions.ServiceException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.sleuth.Tracer;
+//import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.server.ServerWebExchange;
@@ -21,8 +21,8 @@ import java.util.Optional;
 public class ExceptionHandler implements ProblemHandling {
     ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
-    Tracer tracer;
+//    @Autowired
+//    Tracer tracer;
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     ResponseEntity<ThrowableProblem> handleProblem(
@@ -36,7 +36,9 @@ public class ExceptionHandler implements ProblemHandling {
                                 .withDetail(mapper.writeValueAsString(problem.getDetails()))
                                 .withStatus(Status.BAD_REQUEST)
                                 .with("message",problem.getMessage())
-                                .with("traceId", Objects.requireNonNull(tracer.currentSpan()).context().traceId())
+                               // .with("traceId", Objects.requireNonNull(tracer.currentSpan()).context().traceId())
+                                .with("errorThreadid", problem.threadId)
+                                .with("currentThreadId", Thread.currentThread().getName())
                                 .build()
                 ));
     }
